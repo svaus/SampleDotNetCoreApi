@@ -79,10 +79,15 @@ And to appsettings.json file add the section for RollingFile. There is no code r
 
 ### Adding Application insight to Serilog
 
+Adding application insights with Serilog is just two steps as below : 
+
 ```
 dotnet add package Serilog.Sinks.ApplicationInsights
 ```
 
+Also add the below configuration in appsettings.json. Change the instrumentation key.
+
+```
 "WriteTo": [
         { "Name": "Console" },
         {
@@ -100,3 +105,5 @@ dotnet add package Serilog.Sinks.ApplicationInsights
           }
         }
       ],
+
+```
