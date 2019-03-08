@@ -76,3 +76,27 @@ And to appsettings.json file add the section for RollingFile. There is no code r
         }
       ],
 ```
+
+### Adding Application insight to Serilog
+
+```
+dotnet add package Serilog.Sinks.ApplicationInsights
+```
+
+"WriteTo": [
+        { "Name": "Console" },
+        {
+        "Name": "RollingFile",
+          "Args": {
+          "pathFormat": "logs\\log-{Date}.txt",
+          "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] {Message}{NewLine}{Exception}"
+          }
+        },
+        {
+          "Name": "ApplicationInsights",
+          "Args": {
+            "instrumentationKey": "KEY",
+            "telemetryConverter": "Serilog.Sinks.ApplicationInsights.Sinks.ApplicationInsights.TelemetryConverters.TraceTelemetryConverter, Serilog.Sinks.ApplicationInsights"
+          }
+        }
+      ],
