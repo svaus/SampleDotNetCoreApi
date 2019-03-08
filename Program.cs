@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Serilog;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +20,13 @@ namespace SampleDotNetCoreApi
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+                .UseStartup<Startup>()
+                .UseSerilog((hostingContext, loggerConfiguration) => {
+                    loggerConfiguration
+                    .ReadFrom
+                    .Configuration(hostingContext.Configuration)
+                    .Enrich.FromLogContext()
+                    .WriteTo.Console();
+                });
     }
 }
