@@ -53,3 +53,26 @@ In configure method of Startup.cs class add below code in the beginning and also
 ```
 loggerFactory.AddSerilog();
 ```
+
+### Add logging to Rolling File using Serilog
+
+If you want to do logging to file, Serilog provides sink for RollingFile.
+
+```
+dotnet add package Serilog.Sinks.RollingFile
+```
+
+And to appsettings.json file add the section for RollingFile. There is no code required for this. Serilog will read the configuration and apply the settings. The only thing which is required is adding the package.
+
+```
+"WriteTo": [
+        { "Name": "Console" },
+        {
+        "Name": "RollingFile",
+          "Args": {
+          "pathFormat": "logs\\log-{Date}.txt",
+          "outputTemplate": "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] {Message}{NewLine}{Exception}"
+          }
+        }
+      ],
+```
