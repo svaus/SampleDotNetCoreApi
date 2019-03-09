@@ -1,11 +1,12 @@
 # SampleDotNetCoreApi
-Sample DotNet Core Api to setup the project
+
+Sample DotNet Core Api project with Serilog implementation.
 
 ```
 dotnet new webapi
 ```
 
-## Add Serilog Logging to project 
+## Add Serilog Logging to project  
 
 Add below packages to solution/project
 
@@ -15,9 +16,10 @@ dotnet add package Serilog.Sinks.Console
 dotnet add package Serilog.Settings.Configuration
 ```
 
-Modify the Program.cs file as below. Added method UseSerilog which is injecting log configuration from configuration file i.e. appsettings.json 
+Modify the Program.cs file as below. Added method UseSerilog which is injecting log configuration from configuration file i.e. appsettings.json  
 
 ```
+
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
@@ -105,5 +107,47 @@ Also add the below configuration in appsettings.json. Change the instrumentation
           }
         }
       ],
+
+```
+
+### Prefix for Development APM 
+
+Prefix is a free tool provided for development environment monitoring. Download the tool from below location 
+
+[Prefix Download](https://stackify.com/prefix-download/)
+
+Once downloaded install the tool in the development machine.
+
+### Why add Autofac?
+
+Aspnet Core comes up with default dependency injection hence third party dependency injection is not required. However, default dependency injection doesn't have full functionality as offered by other DI libraries. Autofac is another DI library with lot of features built into it. 
+
+### Add Autofac 
+
+Insatall the package using below command. I am going to use without configure container method as usually in complex project we would need a lot of customisation and without configure container works in that scenario.
+
+```
+
+dotnet add package Autofac.Extensions.DependencyInjection
+```
+
+For more details about Autofac check the documentation here -> [Autofac](https://autofaccn.readthedocs.io/en/latest/integration/aspnetcore.html)
+
+Add a public property in the Startup.cs 
+
+```
+public IContainer ApplicationContainer { get; private set; }
+```
+
+and add the below lines of code in ConfigureServices method and change the return type from void to IServiceProvider which will be replaced by new AutofacServiceProvider. This registers all the dependencies in that service to Autofac : 
+
+```
+            var builder = new ContainerBuilder();
+
+            builder.Populate(services);
+
+            this.ApplicationContainer = builder.Build();
+
+            return new AutofacServiceProvider(ApplicationContainer);
 
 ```
