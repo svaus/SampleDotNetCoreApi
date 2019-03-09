@@ -192,4 +192,30 @@ Add below lines in Configure method :
             });
 ```
 
+### Adding ReDoc for swagger for different UI theme
 
+
+
+```
+dotnet add package Swashbuckle.AspNetCore.ReDoc
+```
+
+Add below code and comment out UseSwaggerUI piece of code
+
+
+```
+            // app.UseSwaggerUI(c=> {                
+            //     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sample DotNet Api V1");
+            //     c.RoutePrefix = string.Empty;
+            //     c.InjectStylesheet("/swagger-ui/custom.css");
+            // });
+
+            app.UseReDoc(c => {
+                c.SpecUrl = "/swagger/v1/swagger.json";
+                c.DocumentTitle = "Sample DotNet Core Api V1";
+            });
+
+```
+
+
+![ReDocUI]("ReDocUI.PNG")

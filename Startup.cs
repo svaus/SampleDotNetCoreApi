@@ -70,11 +70,18 @@ namespace SampleDotNetCoreApi
 
             app.UseSwagger();
 
-            app.UseSwaggerUI(c=> {                
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sample DotNet Api V1");
-                c.RoutePrefix = string.Empty;
+            // app.UseSwaggerUI(c=> {                
+            //     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sample DotNet Api V1");
+            //     c.RoutePrefix = string.Empty;
+            //     c.InjectStylesheet("/swagger-ui/custom.css");
+            // });
+
+            app.UseReDoc(c => {
+                c.SpecUrl = "/swagger/v1/swagger.json";
+                c.DocumentTitle = "Sample DotNet Core Api V1";
             });
 
+            app.UseStaticFiles();
             //app.UseHttpsRedirection();
             app.UseMvc();
         }
