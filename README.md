@@ -1,6 +1,16 @@
-# SampleDotNetCoreApi
+# Sample DotNet Core Api with Serilog, Autofac
 
-Sample DotNet Core Api project with Serilog implementation.
+Sample DotNet Core Api project with :
+
+- Serilog implementation with various sinks console, file, application insigths
+- Autofac
+
+## Tools used 
+
+- VS Code 
+- Aspnet Core 2.2 SDK 
+- Azure (For Application Insights only)
+
 
 ```
 dotnet new webapi
