@@ -161,3 +161,35 @@ and add the below lines of code in ConfigureServices method and change the retur
             return new AutofacServiceProvider(ApplicationContainer);
 
 ```
+
+### Add Swagger/Swashbuckle to API for documentation 
+
+
+```
+dotnet add package Swashbuckle.AspNetCore
+```
+
+Add the below lines of code in ```ConfigureService``` method
+
+```
+            services.AddSwaggerGen(c => 
+            {
+                c.SwaggerDoc("v1", new Info{
+                   Title = "Sample DotNet Core Api",
+                   Version = "v1" 
+                });
+            });
+```
+
+Add below lines in Configure method : 
+
+```
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c=> {                
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sample DotNet Api V1");
+                c.RoutePrefix = string.Empty;
+            });
+```
+
+
