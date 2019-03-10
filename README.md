@@ -219,3 +219,9 @@ Add below code and comment out UseSwaggerUI piece of code
 
 
 ![ReDocUI]("https://github.com/svaus/SampleDotNetCoreApi/blob/master/ReDocUI.PNG")
+
+### Add another custom style
+
+Updated the custom.css for material design UI
+
+![SwaggerMaterialUI]("https://github.com/svaus/SampleDotNetCoreApi/blob/master/SwaggerWithStyleChanges.PNG")
