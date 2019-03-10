@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Serilog;
+using Swashbuckle.AspNetCore.ReDoc;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace SampleDotNetCoreApi
@@ -68,18 +69,28 @@ namespace SampleDotNetCoreApi
                 app.UseHsts();
             }
 
-            app.UseSwagger();
-
-            // app.UseSwaggerUI(c=> {                
-            //     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sample DotNet Api V1");
-            //     c.RoutePrefix = string.Empty;
-            //     c.InjectStylesheet("/swagger-ui/custom.css");
-            // });
-
-            app.UseReDoc(c => {
-                c.SpecUrl = "/swagger/v1/swagger.json";
-                c.DocumentTitle = "Sample DotNet Core Api V1";
+            app.UseSwagger(c => {
+                //c.RouteTemplate = "api-docs/{documentName}/swagger.json";                
             });
+
+            app.UseSwaggerUI(c=> {                
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sample DotNet Api V1");
+                c.RoutePrefix = string.Empty;
+                c.InjectStylesheet("/swagger-ui/custom.css");
+
+            });
+
+            // app.UseReDoc(c => {                
+            //     c.DocumentTitle = "Sample DotNet Core Api V1";
+            //     c.RoutePrefix = "api-docs";
+            //     c.SpecUrl = "v1/swagger.json";
+            //     c.ConfigObject = new ConfigObject
+            //     {
+            //         HideDownloadButton = true,
+            //         HideLoading = true
+            //     };
+                
+            // });
 
             app.UseStaticFiles();
             //app.UseHttpsRedirection();
