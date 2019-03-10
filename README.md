@@ -225,3 +225,4 @@ Add below code and comment out UseSwaggerUI piece of code
 Updated the custom.css for material design UI
 
 ![SwaggerMaterialUI]("https://github.com/svaus/SampleDotNetCoreApi/blob/master/SwaggerWithStyleChanges.PNG")
+
