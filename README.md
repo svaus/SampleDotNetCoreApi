@@ -218,4 +218,4 @@ Add below code and comment out UseSwaggerUI piece of code
 ```
 
 
-![ReDocUI]("https://github.com/svaus/SampleDotNetCoreApi/blob/master/ReDocUI.PNG")
+![ReDocUI](https://github.com/svaus/SampleDotNetCoreApi/blob/master/ReDocUI.PNG)
