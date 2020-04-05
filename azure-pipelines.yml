@@ -17,11 +17,9 @@ steps:
   displayName: 'dotnet build $(buildConfiguration)'
 
 - task: NuGetCommand@2
+  displayName: 'NuGet pack'
   inputs:
-    command: 'pack'
-    packagesToPack: '**/*.csproj'
-    packDestination: '$(Build.ArtifactStagingDirectory)'
-
+    command: pack
 # Push a project
 - task: NuGetCommand@2
   inputs:
